@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Order {
+  id             String   @id
+  userId         String
+  walletAddress  String
+  inputToken     String
+  outputToken    String
+  amount         Float
+  side           String
+  status         String
+  chosenDex      String?
+  expectedOutput Float?
+  errorMessage   String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

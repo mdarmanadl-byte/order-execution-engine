@@ -1,0 +1,53 @@
+{
+  "info": {
+    "name": "Order Execution Engine - Backend Task 2 (Arman)",
+    "_postman_id": "6d1c0f5b-arman-oee-collection",
+    "description": "HTTP execute + GET order + WebSocket streaming (same endpoint)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "orderId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "Execute Market Order (POST)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json.orderId) {",
+              "  pm.collectionVariables.set('orderId', json.orderId);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"arman1\",\n  \"walletAddress\": \"wallet_12345\",\n  \"inputToken\": \"SOL\",\n  \"outputToken\": \"USDC\",\n  \"amount\": 10,\n  \"side\": \"sell\"\n}"
+        },
+        "url": "{{baseUrl}}/api/orders/execute"
+      }
+    },
+    {
+      "name": "Get Order Status (GET)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/orders/{{orderId}}"
+      }
+    }
+  ]
+}
