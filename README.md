@@ -153,15 +153,12 @@ npm test
 
 ---
 
-## ✅ Deployment URL
-
-(Add your deployed public URL here)
 
 ---
 
-## ✅ YouTube Demo Link (1–2 min)
+## ✅ YouTube Demo Link 
 
-(Add your public YouTube demo link here)
+https://youtu.be/Aze74SpjNDM?si=pKCYsiJJTvfhk5oq
 
 ```
 ```
